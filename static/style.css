@@ -1,0 +1,120 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    margin: 0;
+    padding: 30px 15px;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px #00000015;
+}
+
+h1, h2 {
+    color: #243b53;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+button {
+    padding: 11px 16px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.logout, .delete {
+    background: #dc2626;
+}
+
+.complete {
+    background: #16a34a;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.actions {
+    display: flex;
+    gap: 6px;
+}
+
+.actions form {
+    margin: 0;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.empty {
+    text-align: center;
+    padding: 20px;
+    color: gray;
+}
+
+.message {
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+}
+
+.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+@media (max-width: 500px) {
+    .task {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header {
+        flex-wrap: wrap;
+    }
+}
