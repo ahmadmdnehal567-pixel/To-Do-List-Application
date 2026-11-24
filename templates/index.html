@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To-Do List</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 40px 15px;
+        }
+
+        .container {
+            max-width: 550px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+
+        h1 {
+            text-align: center;
+            color: #243b53;
+        }
+
+        .add-form {
+            display: flex;
+            gap: 8px;
+        }
+
+        input {
+            flex: 1;
+            min-width: 0;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button, .action {
+            padding: 10px 12px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .add-btn {
+            background: #2563eb;
+        }
+
+        .complete-btn {
+            background: #16a34a;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+        }
+
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #eee;
+            padding: 14px 0;
+        }
+
+        .task-title {
+            overflow-wrap: anywhere;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .actions {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .empty {
+            text-align: center;
+            color: #777;
+            padding: 20px 0;
+        }
+
+        @media (max-width: 420px) {
+            .task {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>My To-Do List</h1>
+        <p>Organize your tasks and stay productive.</p>
+
+        <form action="{{ url_for('add_task') }}"
+              method="POST" class="add-form">
+            <input type="text"
+                   name="title"
+                   placeholder="Enter a new task..."
+                   required>
+            <button type="submit" class="add-btn">Add</button>
+        </form>
+
+        <h2>My Tasks</h2>
+
+        {% if tasks %}
+            {% for task in tasks %}
+                <div class="task">
+                    <span class="task-title
+                        {% if task.completed %}completed{% endif %}">
+                        {{ task.title }}
+                    </span>
+
+                    <div class="actions">
+                        <a class="action complete-btn"
+                           href="{{ url_for(
+                               'complete_task',
+                               task_id=task.id
+                           ) }}">
+                            {% if task.completed %}
+                                Undo
+                            {% else %}
+                                Done
+                            {% endif %}
+                        </a>
+
+                        <a class="action delete-btn"
+                           href="{{ url_for(
+                               'delete_task',
+                               task_id=task.id
+                           ) }}">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="empty">No tasks yet. Add your first task!</p>
+        {% endif %}
+    </div>
+</body>
+</html>
